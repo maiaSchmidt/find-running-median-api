@@ -1,11 +1,10 @@
+package service;
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by geist on 10/8/19.
- */
-public class findRunningMedian {
+public class MedianService {
 
     static double[] runningMedian(int[] numbers) {
         List<Integer> currentNumbers = new ArrayList<>();
@@ -34,7 +33,7 @@ public class findRunningMedian {
             int[] indexes;
             while (insertIndex == null) {
                 if (startIndex == endIndex) {
-                  insertIndex = number < currentNumbers.get(startIndex) ? startIndex : startIndex + 1;
+                    insertIndex = number < currentNumbers.get(startIndex) ? startIndex : startIndex + 1;
                 } else {
                     indexes = getMedianIndexes(startIndex, endIndex);
                     int index = indexes[0];
@@ -85,7 +84,7 @@ public class findRunningMedian {
         int[] indexes = getMedianIndexes(currentNumbers);
 
         if (indexes.length < 2) {
-           return new BigDecimal(currentNumbers.get(indexes[0])).setScale(1,BigDecimal.ROUND_HALF_EVEN);
+            return new BigDecimal(currentNumbers.get(indexes[0])).setScale(1,BigDecimal.ROUND_HALF_EVEN);
         } else {
             return new BigDecimal(currentNumbers.get(indexes[0])).add(new BigDecimal(currentNumbers.get(indexes[1]))).divide(new BigDecimal(2), 1, BigDecimal.ROUND_HALF_EVEN);
         }
