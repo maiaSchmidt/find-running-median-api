@@ -1,6 +1,7 @@
 package com.schmidt.service;
 
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -9,12 +10,15 @@ import java.util.List;
 @Service
 public class MedianService {
 
-    public List<BigDecimal> runningMedian(int[] numbers) {
+    public List<BigDecimal> calculateIncrementalMedian(List<Integer> numbers) {
         List<Integer> currentNumbers = new ArrayList<>();
         List<BigDecimal> medianResults = new ArrayList<>();
-        for (int number : numbers) {
-            addSorted(currentNumbers, number);
-            medianResults.add(calculateMedian(currentNumbers));
+
+        if (!CollectionUtils.isEmpty(numbers)) {
+            for (int number : numbers) {
+                addSorted(currentNumbers, number);
+                medianResults.add(calculateMedian(currentNumbers));
+            }
         }
 
         return medianResults;
@@ -73,10 +77,10 @@ public class MedianService {
         int quantity = endIndex - startIndex + 1;
         List<Integer> indexes = new ArrayList<>();
         if (quantity % 2 == 0) {
-            indexes.add((quantity/2) - 1 + startIndex);
-            indexes.add((quantity/2) + startIndex);
+            indexes.add((quantity / 2) - 1 + startIndex);
+            indexes.add((quantity / 2) + startIndex);
         } else {
-            indexes.add(((quantity - 1)/2) + startIndex);
+            indexes.add(((quantity - 1) / 2) + startIndex);
         }
 
         return indexes;
@@ -86,9 +90,11 @@ public class MedianService {
         List<Integer> indexes = getMedianIndexes(currentNumbers);
 
         if (indexes.size() < 2) {
-            return new BigDecimal(currentNumbers.get(indexes.get(0))).setScale(1,BigDecimal.ROUND_HALF_EVEN);
+            return new BigDecimal(currentNumbers.get(indexes.get(0))).setScale(1, BigDecimal.ROUND_HALF_EVEN);
         } else {
-            return new BigDecimal(currentNumbers.get(indexes.get(0))).add(new BigDecimal(currentNumbers.get(indexes.get(1)))).divide(new BigDecimal(2), 1, BigDecimal.ROUND_HALF_EVEN);
+            return new BigDecimal(currentNumbers.get(indexes.get(0))).add(
+                    new BigDecimal(currentNumbers.get(indexes.get(1))))
+                    .divide(new BigDecimal(2), 1, BigDecimal.ROUND_HALF_EVEN);
         }
     }
 }
