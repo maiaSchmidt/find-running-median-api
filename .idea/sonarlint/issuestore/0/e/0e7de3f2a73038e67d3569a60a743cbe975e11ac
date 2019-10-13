@@ -1,0 +1,8 @@
+
+_squid:S2583"CChange this condition so that it does not always evaluate to "true"(ÌÌä±8€ËüœÜ-
+asquid:S1226"EIntroduce a new variable instead of reusing the parameter "endIndex".(ò¤ş8€ËüœÜ-
+hsquid:S1226"GIntroduce a new variable instead of reusing the parameter "startIndex".(ªÖõÀıÿÿÿÿ8€ËüœÜ-
+ssquid:S3776"RRefactor this method to reduce its Cognitive Complexity from 23 to the 15 allowed.(¿Æ«¤şÿÿÿÿ8€ËüœÜ-
+n
+squid:S134"NRefactor this code to not nest more than 3 if/for/while/switch/try statements.(†ÕÓøüÿÿÿÿ8€ËüœÜ-
+hsquid:S1226"GIntroduce a new variable instead of reusing the parameter "startIndex".(¤İ—Ÿÿÿÿÿÿ8€ËüœÜ-
