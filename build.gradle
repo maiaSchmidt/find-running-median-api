@@ -2,8 +2,10 @@ buildscript {
 
     ext {
         springBootVersion = "2.0.5.RELEASE"
+        dockerPluginVersion = '0.12.0'
         springManagementPluginVersion = '0.5.6.RELEASE'
         mockitoVersion = '2.8.47'
+        projectName = 'find-running-median'
     }
     repositories {
         mavenCentral()
@@ -14,6 +16,7 @@ buildscript {
     dependencies {
         classpath("io.spring.gradle:dependency-management-plugin:${springManagementPluginVersion}")
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath group: 'gradle.plugin.com.palantir.gradle.docker', name: 'gradle-docker', version: "$dockerPluginVersion"
     }
 }
 
@@ -23,11 +26,29 @@ plugins {
 
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
+apply plugin: 'com.palantir.docker'
 
 group 'find-running-median-api'
 version '1.0-SNAPSHOT'
 
 sourceCompatibility = 1.8
+
+bootJar {
+    baseName = "${project.ext.properties.artifactName ?: "${projectName}"}"
+    version = version
+}
+
+docker {
+    name "${project.bootJar.baseName}:${project.bootJar.version}"
+    dockerfile "${projectDir}${project.ext.properties.dockerfileDir ?: '/src/main/docker/Dockerfile'}"
+    files([
+            "${buildDir}/libs/${project.bootJar.baseName}-${project.bootJar.version}.jar",
+            "${projectDir}/src/main/docker/entrypoint.sh"
+    ])
+    buildArgs([
+            ARTIFACT_NAME: "${project.bootJar.baseName}-${project.bootJar.version}.jar"
+    ])
+}
 
 repositories {
     mavenCentral()
