@@ -1,12 +1,15 @@
 package service;
 
+import org.springframework.stereotype.Service;
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+@Service
 public class MedianService {
 
-    static double[] runningMedian(int[] numbers) {
+    public double[] runningMedian(int[] numbers) {
         List<Integer> currentNumbers = new ArrayList<>();
         List<BigDecimal> medianResults = new ArrayList<>();
         for (int number : numbers) {
@@ -23,7 +26,7 @@ public class MedianService {
         return results;
     }
 
-    private static void addSorted(List<Integer> currentNumbers, int number) {
+    private void addSorted(List<Integer> currentNumbers, int number) {
         if (currentNumbers.isEmpty()) {
             currentNumbers.add(number);
         } else {
@@ -61,11 +64,11 @@ public class MedianService {
         }
     }
 
-    private static int[] getMedianIndexes(List<Integer> currentNumbers) {
+    private  int[] getMedianIndexes(List<Integer> currentNumbers) {
         return getMedianIndexes(0, currentNumbers.size() - 1);
     }
 
-    private static int[] getMedianIndexes(int startIndex, int endIndex) {
+    private int[] getMedianIndexes(int startIndex, int endIndex) {
         int quantity = endIndex - startIndex + 1;
         int[] indexes;
         if (quantity % 2 == 0) {
@@ -80,7 +83,7 @@ public class MedianService {
         return indexes;
     }
 
-    private static BigDecimal calculateMedian(List<Integer> currentNumbers) {
+    private BigDecimal calculateMedian(List<Integer> currentNumbers) {
         int[] indexes = getMedianIndexes(currentNumbers);
 
         if (indexes.length < 2) {

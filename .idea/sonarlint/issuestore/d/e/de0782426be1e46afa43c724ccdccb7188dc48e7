@@ -1,0 +1,6 @@
+
+_squid:S2583"CChange this condition so that it does not always evaluate to "true"(ÌÌä±8µÈô•Ü-
+n
+squid:S134"NRefactor this code to not nest more than 3 if/for/while/switch/try statements.(«Âò£ıÿÿÿÿ8µÈô•Ü-
+nsquid:S3776"RRefactor this method to reduce its Cognitive Complexity from 31 to the 15 allowed.(ó¿·‘8µÈô•Ü-
+[squid:S1118":Add a private constructor to hide the implicit public one.(´£ÿÿÿÿÿ8µÈô•Ü-
