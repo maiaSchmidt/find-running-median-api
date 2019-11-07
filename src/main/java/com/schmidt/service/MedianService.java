@@ -10,6 +10,11 @@ import java.util.List;
 @Service
 public class MedianService {
 
+    /**
+     * 
+     * @param numbers
+     * @return incremental median of the numbers
+     */    
     public List<BigDecimal> calculateIncrementalMedian(List<Integer> numbers) {
         List<Integer> currentNumbers = new ArrayList<>();
         List<BigDecimal> medianResults = new ArrayList<>();
